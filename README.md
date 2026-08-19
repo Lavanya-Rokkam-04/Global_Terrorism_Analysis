@@ -237,36 +237,39 @@ sql/terrorism_analysis.sql
 
 # 📊 Power BI Dashboard
 
-The processed data and SQL analysis were used to build an interactive Power BI dashboard.
+I built an interactive Power BI dashboard to explore the major patterns and trends identified during the analysis.
 
-The dashboard presents different aspects of the analysis, including:
+The dashboard covers:
 
+- Overall terrorist incidents and casualties
 - Incident trends over time
-- Regional distribution
-- Country-level incident patterns
+- Regional and country-level analysis
 - Attack types
 - Target types
 - Weapon types
-- Casualties
 - Terrorist organizations
 - Geographic distribution of incidents
 - Key incident and casualty metrics
 
-The Power BI file is available here:
+The complete Power BI dashboard is available as:
 
 ```text
 powerbi/Global Terrorism Analysis.pbix
 ```
 
-### Dashboard Screenshots
+> **Note:** The `.pbix` file requires Power BI Desktop to open and interact with the dashboard.
 
-Dashboard screenshots are available in:
+## Dashboard Preview
 
-```text
-powerbi/image/
-```
+### Page 1 — Global Terrorism Analysis Overview
 
-> **Note:** The `.pbix` file requires **Power BI Desktop** to open and interact with the dashboard.
+![Global Terrorism Analysis Overview](powerbi/image/Global_Terrorism%20Analysis%20Overview%28Page1%29.png)
+
+---
+
+### Page 2 — Global Terrorism Detailed Analysis
+
+![Global Terrorism Detailed Analysis](powerbi/image/Global_Terrorism%20Detailed%20Analysis%28Page2%29.png)
 
 ---
 
