@@ -39,8 +39,7 @@ Key elements include:
 * Geographic distribution
 * Interactive filters
 
-![Global Terrorism Analysis Overview](powerbi/image/Global_Terrorism%20Analysis%20Overview%28Page1%29.png)
-
+![Global Terrorism Analysis Overview](image/Global_Terrorism%20Analysis%20Overview%28Page1%29.png)
 ---
 
 ### Page 2 — Global Terrorism Detailed Analysis
