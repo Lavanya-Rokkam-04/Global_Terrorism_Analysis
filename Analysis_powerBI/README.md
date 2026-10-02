@@ -111,7 +111,6 @@ The processed dataset was then loaded into SQL Server and used for the analytica
 
 ## Power BI File
 
-The complete Power BI dashboard is available in this folder:
+📊 **[Open the Interactive Power BI Dashboard (.pbix)](Global%20Terrorism%20Analysis.pbix)**
 
-```text
-Global Terrorism Analysis.pbix
+The `.pbix` file requires **Power BI Desktop** to open and interact with the dashboard.
