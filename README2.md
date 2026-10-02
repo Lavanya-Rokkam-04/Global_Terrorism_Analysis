@@ -49,7 +49,9 @@ The source dataset used in the analysis contains:
 * **47 years of incident data**
 * Coverage from **1970 through 2017**
 
-The original dataset is not stored in this repository.
+The original dataset is not included in this repository because of its large file size.
+
+Instead, I loaded the dataset locally using Python and selected the fields required for the analysis and Power BI dashboard.
 
 ### Data Quality
 
