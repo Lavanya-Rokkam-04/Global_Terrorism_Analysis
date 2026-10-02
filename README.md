@@ -551,19 +551,3 @@ The dataset used for this project covers terrorist incidents recorded between **
 This project demonstrates an end-to-end data analytics workflow using:
 
 **Python → SQL Server → Power BI → GitHub**
-
-### Important
-
-When you paste this into GitHub's `README.md` **Edit** screen:
-
-- `#` and `##` will become headings.
-- `-` will become bullet points.
-- The `|` sections will become tables.
-- The sections surrounded by three backticks will become code blocks.
-- The `---` lines will become separators.
-
-So **do not remove the `#`, `|`, `-`, or backticks**. They are what tell GitHub how to format the README.
-
-After pasting it, click **Preview** before committing. If the Preview looks good, then click **Commit changes**.
-
-One small thing I deliberately did **not** include: your local Windows username/path as a prominent project detail beyond the reproducibility example. That's fine to show as an example, but you don't want the README to depend on your personal computer's folder structure.
