@@ -39,7 +39,7 @@ Key elements include:
 - Geographic and categorical comparisons
 - Interactive filtering
 
-![Global Terrorism Detailed Analysis](Global_Terrorism%20Detailed%20Analysis%28Page2%29.png)
+![Global Terrorism Detailed Analysis](Global_Terrorism%20Detailed%20Analysis%28Page1%29.png)
 
 ---
 
@@ -57,7 +57,7 @@ Key elements include:
 - Geographic distribution
 - Interactive filters
 
-![Global Terrorism Analysis Overview](Global_Terrorism%20Analysis%20Overview%28Page1%29.png)
+![Global Terrorism Analysis Overview](Global_Terrorism%20Analysis%20Overview%28Page2%29.png)
 
 ---
 
