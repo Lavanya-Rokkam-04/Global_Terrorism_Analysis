@@ -25,25 +25,7 @@ The dashboard was developed to provide an interactive view of:
 
 ## Dashboard Pages
 
-### Page 1 — Global Terrorism Analysis Overview
-
-The overview page provides a high-level summary of the dataset and highlights major trends in recorded terrorist incidents.
-
-Key elements include:
-
-- Total incident metrics
-- Recorded casualty metrics
-- Incident trends over time
-- Regional distribution
-- Attack type analysis
-- Geographic distribution
-- Interactive filters
-
-![Global Terrorism Analysis Overview](Global_Terrorism%20Analysis%20Overview%28Page1%29.png)
-
----
-
-### Page 2 — Global Terrorism Detailed Analysis
+### Page 1 — Global Terrorism Detailed Overview
 
 The detailed analysis page provides additional breakdowns of incidents by attack characteristics, targets, weapons, organizations, and casualties.
 
@@ -58,6 +40,24 @@ Key elements include:
 - Interactive filtering
 
 ![Global Terrorism Detailed Analysis](Global_Terrorism%20Detailed%20Analysis%28Page2%29.png)
+
+---
+
+### Page 2 — Global Terrorism Analysis Analysis
+
+The overview page provides a high-level summary of the dataset and highlights major trends in recorded terrorist incidents.
+
+Key elements include:
+
+- Total incident metrics
+- Recorded casualty metrics
+- Incident trends over time
+- Regional distribution
+- Attack type analysis
+- Geographic distribution
+- Interactive filters
+
+![Global Terrorism Analysis Overview](Global_Terrorism%20Analysis%20Overview%28Page1%29.png)
 
 ---
 
