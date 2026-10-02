@@ -1,4 +1,22 @@
--- The number of terrorist activities changed over the years,and the trend varied across different regions.
+```sql
+/* =========================================================
+   Global Terrorism Analysis
+   SQL Server Analysis
+   =========================================================
+
+   Database : GlobalTerrorism
+   Table    : GTD_Dashboard
+
+   Purpose:
+   Analyze historical terrorist incident data across time,
+   geography, attack characteristics, organizations, weapons,
+   and recorded casualties.
+   ========================================================= */
+
+
+/* =========================================================
+   1. Regional Incident Trends and Share of Global Incidents
+   ========================================================= */
 
 WITH GlobalYear AS
 (
@@ -28,35 +46,17 @@ SELECT
         100.0 * r.regional_incidents / g.global_incidents,
         2
     ) AS region_share_pct
-FROM RegionYear r
-JOIN GlobalYear g
+FROM RegionYear AS r
+JOIN GlobalYear AS g
     ON r.iyear = g.iyear
 ORDER BY
     r.iyear,
     r.regional_incidents DESC;
 
-/* Regional pattern
 
-There are very clear differences from the global pattern.
-
-1970s: Western Europe and North America account for a large share.
-1980s: South America and Central America & Caribbean become major contributors.
-1990s: South America, South Asia, and Middle East & North Africa become more prominent.
-2000s onward: Middle East & North Africa and South Asia become dominant.
-2014: Middle East & North Africa accounts for 41.05% of incidents.
-2016: Middle East & North Africa reaches 45.01%.
-2017: Middle East & North Africa is still the largest at 34.68%, followed by South Asia at 31.47% and Sub-Saharan Africa at 18.07%.
-Final answer you can put in your project
-
-The number of terrorist activities fluctuated considerably between 1970 and 2017, with an overall increase over the long term. 
-Global incidents reached their highest level in 2014, with 16,903 recorded incidents, before declining through 2017. 
-The regional trend differs significantly from the global pattern. 
-Western Europe and North America accounted for a large share of incidents during the 1970s, 
-while South America and Central America & Caribbean became more prominent during the 1980s. From the 2000s onward, 
-Middle East & North Africa and South Asia became the dominant regions, accounting for a large proportion of global terrorist incidents.
-*/
-
--- The number of incidents and casualties can be compared to identify the relationship and possible outliers.
+/* =========================================================
+   2. Annual Incident Volume and Recorded Casualties
+   ========================================================= */
 
 SELECT
     iyear,
@@ -65,14 +65,18 @@ SELECT
     SUM(ISNULL(nwound, 0)) AS total_wounded,
     SUM(ISNULL(nkill, 0) + ISNULL(nwound, 0)) AS total_casualties,
     ROUND(
-        1.0 * SUM(ISNULL(nkill, 0) + ISNULL(nwound, 0)) / COUNT(*),
+        1.0 * SUM(ISNULL(nkill, 0) + ISNULL(nwound, 0))
+        / COUNT(*),
         2
     ) AS casualties_per_incident
 FROM GTD_Dashboard
 GROUP BY iyear
 ORDER BY iyear;
 
--- Identify the incidents with the highest number of casualties.
+
+/* =========================================================
+   3. Highest-Casualty Recorded Incidents
+   ========================================================= */
 
 SELECT TOP 10
     eventid,
@@ -88,23 +92,24 @@ SELECT TOP 10
 FROM GTD_Dashboard
 ORDER BY total_casualties DESC;
 
--- Q3: Analyze the most common terrorist attack methods,
--- differences across regions, and changes over time.
 
-WITH attack_analysis AS
+/* =========================================================
+   4. Attack Type Analysis by Year and Region
+   ========================================================= */
+
+WITH AttackAnalysis AS
 (
     SELECT
         iyear,
         region_txt,
         attacktype1_txt,
         COUNT(*) AS incident_count
-    FROM GTD_dashboard
+    FROM GTD_Dashboard
     GROUP BY
         iyear,
         region_txt,
         attacktype1_txt
 )
-
 SELECT
     iyear,
     region_txt,
@@ -119,13 +124,16 @@ SELECT
         PARTITION BY region_txt, attacktype1_txt
     ) AS regional_attack_count
 
-FROM attack_analysis
+FROM AttackAnalysis
 ORDER BY
     iyear,
     region_txt,
     incident_count DESC;
 
--- The locations of attacks on a map to visualize their spread.
+
+/* =========================================================
+   5. Geographic Incident Data
+   ========================================================= */
 
 SELECT
     eventid,
@@ -140,14 +148,17 @@ SELECT
     ISNULL(nkill, 0) AS killed,
     ISNULL(nwound, 0) AS wounded,
     ISNULL(nkill, 0) + ISNULL(nwound, 0) AS total_casualties
-FROM GTD_dashboard
+FROM GTD_Dashboard
 WHERE latitude IS NOT NULL
   AND longitude IS NOT NULL
 ORDER BY
     region_txt,
     iyear;
 
--- The countries with the highest number of terrorist incidents.
+
+/* =========================================================
+   6. Country-Level Incident and Casualty Analysis
+   ========================================================= */
 
 SELECT TOP 20
     country_txt,
@@ -155,11 +166,14 @@ SELECT TOP 20
     SUM(ISNULL(nkill, 0)) AS total_killed,
     SUM(ISNULL(nwound, 0)) AS total_wounded,
     SUM(ISNULL(nkill, 0) + ISNULL(nwound, 0)) AS total_casualties
-FROM GTD_dashboard
+FROM GTD_Dashboard
 GROUP BY country_txt
 ORDER BY incident_count DESC;
 
--- The terrorist groups responsible for the highest number of incidents.
+
+/* =========================================================
+   7. Terrorist Organizations Associated with Recorded Incidents
+   ========================================================= */
 
 SELECT TOP 20
     gname,
@@ -167,12 +181,15 @@ SELECT TOP 20
     SUM(ISNULL(nkill, 0)) AS total_killed,
     SUM(ISNULL(nwound, 0)) AS total_wounded,
     SUM(ISNULL(nkill, 0) + ISNULL(nwound, 0)) AS total_casualties
-FROM GTD_dashboard
+FROM GTD_Dashboard
 WHERE gname IS NOT NULL
 GROUP BY gname
 ORDER BY incident_count DESC;
 
--- The years with the highest number of terrorist incidents.
+
+/* =========================================================
+   8. Years with the Highest Incident Counts
+   ========================================================= */
 
 SELECT TOP 10
     iyear,
@@ -180,11 +197,14 @@ SELECT TOP 10
     SUM(ISNULL(nkill, 0)) AS total_killed,
     SUM(ISNULL(nwound, 0)) AS total_wounded,
     SUM(ISNULL(nkill, 0) + ISNULL(nwound, 0)) AS total_casualties
-FROM GTD_dashboard
+FROM GTD_Dashboard
 GROUP BY iyear
 ORDER BY incident_count DESC;
 
--- The regions with the highest number of terrorist incidents and casualties.
+
+/* =========================================================
+   9. Regional Incident and Casualty Analysis
+   ========================================================= */
 
 SELECT
     region_txt,
@@ -192,11 +212,14 @@ SELECT
     SUM(ISNULL(nkill, 0)) AS total_killed,
     SUM(ISNULL(nwound, 0)) AS total_wounded,
     SUM(ISNULL(nkill, 0) + ISNULL(nwound, 0)) AS total_casualties
-FROM GTD_dashboard
+FROM GTD_Dashboard
 GROUP BY region_txt
 ORDER BY incident_count DESC;
 
--- The attack types with the highest number of casualties.
+
+/* =========================================================
+   10. Attack Types Ranked by Recorded Casualties
+   ========================================================= */
 
 SELECT
     attacktype1_txt,
@@ -204,6 +227,46 @@ SELECT
     SUM(ISNULL(nkill, 0)) AS total_killed,
     SUM(ISNULL(nwound, 0)) AS total_wounded,
     SUM(ISNULL(nkill, 0) + ISNULL(nwound, 0)) AS total_casualties
-FROM GTD_dashboard
+FROM GTD_Dashboard
 GROUP BY attacktype1_txt
 ORDER BY total_casualties DESC;
+
+
+/* =========================================================
+   11. Weapon Type Analysis
+   ========================================================= */
+
+SELECT
+    weaptype1_txt AS weapon_type,
+    COUNT(*) AS incident_count,
+    SUM(ISNULL(nkill, 0)) AS total_killed,
+    SUM(ISNULL(nwound, 0)) AS total_wounded,
+    SUM(ISNULL(nkill, 0) + ISNULL(nwound, 0)) AS total_casualties
+FROM GTD_Dashboard
+GROUP BY weaptype1_txt
+ORDER BY incident_count DESC;
+
+
+/* =========================================================
+   12. Attack Success Classification
+   ========================================================= */
+
+SELECT
+    success,
+    COUNT(*) AS incident_count
+FROM GTD_Dashboard
+GROUP BY success
+ORDER BY success DESC;
+
+
+/* =========================================================
+   13. Suicide Incident Classification
+   ========================================================= */
+
+SELECT
+    suicide,
+    COUNT(*) AS incident_count
+FROM GTD_Dashboard
+GROUP BY suicide
+ORDER BY suicide DESC;
+```
